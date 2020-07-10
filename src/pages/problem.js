@@ -35,18 +35,12 @@ const IndexPage = () => {
   const [darkMode, setDarkMode] = useState((typeof window !== "undefined" && localStorage.getItem("dark") === "true"))
   const [theme, setTheme] = useState((typeof window !== "undefined" && localStorage.getItem("dark") === "true") ? darkTheme : lightTheme)
 
-  const [problems, setProblems] = useState([])
+  const [state, setState] = useState({
+    title: ''
+  })
 
   useEffect(() => {
-    const arr = []
-    for (let i = 0; i < 20; i++) {
-      arr.push(<ProblemCard title={"Android application"}
-                            description={"Need a lot of support on this issue"} loading={false}
-                            problemId={'12345'}
-      />)
-    }
 
-    setProblems(arr)
     // TODO Code here to fetch problems from DB
   }, [])
 
@@ -62,11 +56,7 @@ const IndexPage = () => {
 
   return <ThemeProvider theme={theme}>
     <SEO title="Home"/>
-    <TopNav toggleDarkMode={toggleDarkMode} darkMode={darkMode} title={'Team Up'}/>
-    <HomeTitle>Welcome to TeamUp! 👋</HomeTitle>
-    <HomeProblems>
-      {problems}
-    </HomeProblems>
+    <TopNav backPresent toggleDarkMode={toggleDarkMode} darkMode={darkMode} title={state.title}/>
   </ThemeProvider>
 }
 
